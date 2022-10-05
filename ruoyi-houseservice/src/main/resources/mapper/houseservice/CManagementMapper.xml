@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.houseservice.mapper.CManagementMapper">
+    
+    <resultMap type="CManagement" id="CManagementResult">
+        <result property="id"    column="id"    />
+        <result property="firmId"    column="firm_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="roleId"    column="role_id"    />
+        <result property="customId"    column="custom_id"    />
+        <result property="uploader"    column="uploader"    />
+        <result property="uploaderPhone"    column="uploader_phone"    />
+        <result property="gongSiPan"    column="gong_si_pan"    />
+        <result property="customerLever"    column="customer_lever"    />
+        <result property="purpose"    column="purpose"    />
+        <result property="name"    column="name"    />
+        <result property="phoneNum"    column="phone_num"    />
+        <result property="nameOne"    column="name_one"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="sex"    column="sex"    />
+        <result property="region"    column="region"    />
+        <result property="homeName"    column="home_name"    />
+        <result property="allPrice"    column="all_price"    />
+        <result property="area"    column="area"    />
+        <result property="onePay"    column="one_pay"    />
+        <result property="homeType"    column="home_type"    />
+        <result property="towards"    column="towards"    />
+        <result property="furnish"    column="furnish"    />
+        <result property="furnishStyle"    column="furnish_style"    />
+        <result property="furnishYear"    column="furnish_year"    />
+        <result property="elevator"    column="elevator"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="floor"    column="floor"    />
+        <result property="note"    column="note"    />
+        <result property="expireDate"    column="expire_date"    />
+        <result property="facility"    column="facility"    />
+        <result property="otherNeed"    column="other_need"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="flog2"    column="flog2"    />
+        <result property="flog3"    column="flog3"    />
+    </resultMap>
+
+    <sql id="selectCManagementVo">
+        select id, firm_id, dept_id, user_id, role_id, custom_id, uploader, uploader_phone, gong_si_pan, customer_lever, purpose, name, phone_num, name_one, phone_number, sex, region, home_name, all_price, area, one_pay, home_type, towards, furnish, furnish_style, furnish_year, elevator, pay_type, floor, note, expire_date, facility, other_need, status, create_time, update_time, flog2, flog3 from c_management CManagement
+    </sql>
+
+    <select id="selectCManagementList" parameterType="CManagement" resultMap="CManagementResult">
+        <include refid="selectCManagementVo"/>
+        <where>  
+            <if test="firmId != null "> and firm_id = #{firmId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="roleId != null "> and role_id = #{roleId}</if>
+            <if test="customId != null "> and custom_id = #{customId}</if>
+            <if test="uploader != null  and uploader != ''"> and uploader = #{uploader}</if>
+            <if test="uploaderPhone != null  and uploaderPhone != ''"> and uploader_phone = #{uploaderPhone}</if>
+            <if test="gongSiPan != null  and gongSiPan != ''"> and gong_si_pan = #{gongSiPan}</if>
+            <if test="customerLever != null  and customerLever != ''"> and customer_lever = #{customerLever}</if>
+            <if test="purpose != null  and purpose != ''"> and purpose = #{purpose}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="phoneNum != null  and phoneNum != ''"> and phone_num = #{phoneNum}</if>
+            <if test="nameOne != null  and nameOne != ''"> and name_one like concat('%', #{nameOne}, '%')</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="region != null  and region != ''"> and region like concat('%', #{region}, '%')</if>
+            <if test="homeName != null  and homeName != ''"> and home_name like concat('%', #{homeName}, '%')</if>
+            <if test="allPrice != null  and allPrice != ''"> and all_price = #{allPrice}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="onePay != null  and onePay != ''"> and one_pay = #{onePay}</if>
+            <if test="homeType != null  and homeType != ''"> and home_type = #{homeType}</if>
+            <if test="towards != null  and towards != ''"> and towards = #{towards}</if>
+            <if test="furnish != null  and furnish != ''"> and furnish = #{furnish}</if>
+            <if test="furnishStyle != null  and furnishStyle != ''"> and furnish_style = #{furnishStyle}</if>
+            <if test="furnishYear != null  and furnishYear != ''"> and furnish_year = #{furnishYear}</if>
+            <if test="elevator != null  and elevator != ''"> and elevator = #{elevator}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="floor != null  and floor != ''"> and floor = #{floor}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="expireDate != null "> and expire_date = #{expireDate}</if>
+            <if test="facility != null  and facility != ''"> and facility = #{facility}</if>
+            <if test="otherNeed != null  and otherNeed != ''"> and other_need = #{otherNeed}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="flog2 != null  and flog2 != ''"> and flog2 = #{flog2}</if>
+            <if test="flog3 != null  and flog3 != ''"> and flog3 = #{flog3}</if>
+        </where>
+        order by create_time DESC
+    </select>
+
+    <select id="selectCManagementListInfo" parameterType="CManagement" resultMap="CManagementResult">
+        <include refid="selectCManagementVo"/>
+        <where>
+            <if test="firmId != null "> and firm_id = #{firmId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="roleId != null "> and role_id = #{roleId}</if>
+            <if test="customId != null "> and custom_id = #{customId}</if>
+            <if test="uploader != null  and uploader != ''"> and uploader = #{uploader}</if>
+            <if test="uploaderPhone != null  and uploaderPhone != ''"> and uploader_phone = #{uploaderPhone}</if>
+            <if test="gongSiPan != null  and gongSiPan != ''"> and gong_si_pan = #{gongSiPan}</if>
+            <if test="customerLever != null  and customerLever != ''"> and customer_lever = #{customerLever}</if>
+            <if test="purpose != null  and purpose != ''"> and purpose = #{purpose}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="phoneNum != null  and phoneNum != ''"> and phone_num = #{phoneNum}</if>
+            <if test="nameOne != null  and nameOne != ''"> and name_one like concat('%', #{nameOne}, '%')</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="region != null  and region != ''"> and region like concat('%', #{region}, '%')</if>
+            <if test="homeName != null  and homeName != ''"> and home_name like concat('%', #{homeName}, '%')</if>
+            <if test="allPrice != null  and allPrice != ''"> and all_price = #{allPrice}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="onePay != null  and onePay != ''"> and one_pay = #{onePay}</if>
+            <if test="homeType != null  and homeType != ''"> and home_type = #{homeType}</if>
+            <if test="towards != null  and towards != ''"> and towards = #{towards}</if>
+            <if test="furnish != null  and furnish != ''"> and furnish = #{furnish}</if>
+            <if test="furnishStyle != null  and furnishStyle != ''"> and furnish_style = #{furnishStyle}</if>
+            <if test="furnishYear != null  and furnishYear != ''"> and furnish_year = #{furnishYear}</if>
+            <if test="elevator != null  and elevator != ''"> and elevator = #{elevator}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="floor != null  and floor != ''"> and floor = #{floor}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="expireDate != null "> and expire_date = #{expireDate}</if>
+            <if test="facility != null  and facility != ''"> and facility = #{facility}</if>
+            <if test="otherNeed != null  and otherNeed != ''"> and other_need = #{otherNeed}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="flog2 != null  and flog2 != ''"> and flog2 = #{flog2}</if>
+            <if test="flog3 != null  and flog3 != ''"> and flog3 = #{flog3}</if>
+        </where>
+        order by create_time DESC
+    </select>
+
+    <select id="selectCustomer" parameterType="String" resultMap="CManagementResult">
+        <include refid="selectCManagementVo"/>
+        where all_Price = #{allpriceNeed} and facility REGEXP #{specialNeed}
+    </select>
+    
+    <select id="selectCManagementById" parameterType="Long" resultMap="CManagementResult">
+        <include refid="selectCManagementVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCManagement" parameterType="CManagement" useGeneratedKeys="true" keyProperty="id">
+        insert into c_management
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="firmId != null">firm_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="roleId != null">role_id,</if>
+            <if test="customId != null">custom_id,</if>
+            <if test="uploader != null">uploader,</if>
+            <if test="uploaderPhone != null">uploader_phone,</if>
+            <if test="gongSiPan != null and gongSiPan != ''">gong_si_pan,</if>
+            <if test="customerLever != null and customerLever != ''">customer_lever,</if>
+            <if test="purpose != null and purpose != ''">purpose,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="phoneNum != null and phoneNum != ''">phone_num,</if>
+            <if test="nameOne != null">name_one,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="region != null and region != ''">region,</if>
+            <if test="homeName != null and homeName != ''">home_name,</if>
+            <if test="allPrice != null and allPrice != ''">all_price,</if>
+            <if test="area != null">area,</if>
+            <if test="onePay != null and onePay != ''">one_pay,</if>
+            <if test="homeType != null and homeType != ''">home_type,</if>
+            <if test="towards != null and towards != ''">towards,</if>
+            <if test="furnish != null and furnish != ''">furnish,</if>
+            <if test="furnishStyle != null and furnishStyle != ''">furnish_style,</if>
+            <if test="furnishYear != null">furnish_year,</if>
+            <if test="elevator != null and elevator != ''">elevator,</if>
+            <if test="payType != null and payType != ''">pay_type,</if>
+            <if test="floor != null">floor,</if>
+            <if test="note != null">note,</if>
+            <if test="expireDate != null">expire_date,</if>
+            <if test="facility != null">facility,</if>
+            <if test="otherNeed != null">other_need,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="flog2 != null">flog2,</if>
+            <if test="flog3 != null">flog3,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="firmId != null">#{firmId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="roleId != null">#{roleId},</if>
+            <if test="customId != null">#{customId},</if>
+            <if test="uploader != null">#{uploader},</if>
+            <if test="uploaderPhone != null">#{uploaderPhone},</if>
+            <if test="gongSiPan != null and gongSiPan != ''">#{gongSiPan},</if>
+            <if test="customerLever != null and customerLever != ''">#{customerLever},</if>
+            <if test="purpose != null and purpose != ''">#{purpose},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="phoneNum != null and phoneNum != ''">#{phoneNum},</if>
+            <if test="nameOne != null">#{nameOne},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="region != null and region != ''">#{region},</if>
+            <if test="homeName != null and homeName != ''">#{homeName},</if>
+            <if test="allPrice != null and allPrice != ''">#{allPrice},</if>
+            <if test="area != null">#{area},</if>
+            <if test="onePay != null and onePay != ''">#{onePay},</if>
+            <if test="homeType != null and homeType != ''">#{homeType},</if>
+            <if test="towards != null and towards != ''">#{towards},</if>
+            <if test="furnish != null and furnish != ''">#{furnish},</if>
+            <if test="furnishStyle != null and furnishStyle != ''">#{furnishStyle},</if>
+            <if test="furnishYear != null">#{furnishYear},</if>
+            <if test="elevator != null and elevator != ''">#{elevator},</if>
+            <if test="payType != null and payType != ''">#{payType},</if>
+            <if test="floor != null">#{floor},</if>
+            <if test="note != null">#{note},</if>
+            <if test="expireDate != null">#{expireDate},</if>
+            <if test="facility != null">#{facility},</if>
+            <if test="otherNeed != null">#{otherNeed},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="flog2 != null">#{flog2},</if>
+            <if test="flog3 != null">#{flog3},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCManagement" parameterType="CManagement">
+        update c_management
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="firmId != null">firm_id = #{firmId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="customId != null">custom_id = #{customId},</if>
+            <if test="uploader != null">uploader = #{uploader},</if>
+            <if test="uploaderPhone != null">uploader_phone = #{uploaderPhone},</if>
+            <if test="gongSiPan != null and gongSiPan != ''">gong_si_pan = #{gongSiPan},</if>
+            <if test="customerLever != null and customerLever != ''">customer_lever = #{customerLever},</if>
+            <if test="purpose != null and purpose != ''">purpose = #{purpose},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="phoneNum != null and phoneNum != ''">phone_num = #{phoneNum},</if>
+            <if test="nameOne != null">name_one = #{nameOne},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="region != null and region != ''">region = #{region},</if>
+            <if test="homeName != null and homeName != ''">home_name = #{homeName},</if>
+            <if test="allPrice != null and allPrice != ''">all_price = #{allPrice},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="onePay != null and onePay != ''">one_pay = #{onePay},</if>
+            <if test="homeType != null and homeType != ''">home_type = #{homeType},</if>
+            <if test="towards != null and towards != ''">towards = #{towards},</if>
+            <if test="furnish != null and furnish != ''">furnish = #{furnish},</if>
+            <if test="furnishStyle != null and furnishStyle != ''">furnish_style = #{furnishStyle},</if>
+            <if test="furnishYear != null">furnish_year = #{furnishYear},</if>
+            <if test="elevator != null and elevator != ''">elevator = #{elevator},</if>
+            <if test="payType != null and payType != ''">pay_type = #{payType},</if>
+            <if test="floor != null">floor = #{floor},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="expireDate != null">expire_date = #{expireDate},</if>
+            <if test="facility != null">facility = #{facility},</if>
+            <if test="otherNeed != null">other_need = #{otherNeed},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="flog2 != null">flog2 = #{flog2},</if>
+            <if test="flog3 != null">flog3 = #{flog3},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCManagementById" parameterType="Long">
+        delete from c_management where id = #{id}
+    </delete>
+
+    <delete id="deleteCManagementByIds" parameterType="String">
+        delete from c_management where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

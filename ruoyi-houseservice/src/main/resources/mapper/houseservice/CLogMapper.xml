@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.houseservice.mapper.CLogMapper">
+    
+    <resultMap type="CLog" id="CLogResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="store"    column="store"    />
+        <result property="department"    column="department"    />
+        <result property="checkTime"    column="check_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectCLogVo">
+        select id, name, store, department, check_time, remark from c_log
+    </sql>
+
+    <select id="selectCLogList" parameterType="CLog" resultMap="CLogResult">
+        <include refid="selectCLogVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="store != null  and store != ''"> and store = #{store}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="checkTime != null "> and check_time = #{checkTime}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+        </where>
+    </select>
+    
+    <select id="selectCLogById" parameterType="Long" resultMap="CLogResult">
+        <include refid="selectCLogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCLog" parameterType="CLog">
+        insert into c_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="store != null">store,</if>
+            <if test="department != null">department,</if>
+            <if test="checkTime != null">check_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="store != null">#{store},</if>
+            <if test="department != null">#{department},</if>
+            <if test="checkTime != null">#{checkTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCLog" parameterType="CLog">
+        update c_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="store != null">store = #{store},</if>
+            <if test="department != null">department = #{department},</if>
+            <if test="checkTime != null">check_time = #{checkTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCLogById" parameterType="Long">
+        delete from c_log where id = #{id}
+    </delete>
+
+    <delete id="deleteCLogByIds" parameterType="String">
+        delete from c_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="cleanCLog">
+        truncate table c_log
+    </update>
+    
+</mapper>

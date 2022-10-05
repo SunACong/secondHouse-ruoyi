@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.houseservice.mapper.HousingMapper">
+    
+    <resultMap type="Housing" id="HousingResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="property"    column="property"    />
+        <result property="bankValue"    column="bank_value"    />
+        <result property="marketPrice"    column="market_price"    />
+        <result property="taxPrice"    column="tax_price"    />
+        <result property="distric"    column="distric"    />
+        <result property="loanValue"    column="loan_value"    />
+        <result property="exchangeDate"    column="exchange_date"    />
+        <result property="productStatus"    column="product_status"    />
+        <result property="ready"    column="ready"    />
+    </resultMap>
+
+    <sql id="selectHousingVo">
+        select id, name, property, bank_value, market_price, tax_price, distric, loan_value, exchange_date, product_status, ready from housing
+    </sql>
+
+    <select id="selectHousingList" parameterType="Housing" resultMap="HousingResult">
+        <include refid="selectHousingVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="property != null  and property != ''"> and property = #{property}</if>
+            <if test="bankValue != null "> and bank_value = #{bankValue}</if>
+            <if test="marketPrice != null "> and market_price = #{marketPrice}</if>
+            <if test="taxPrice != null "> and tax_price = #{taxPrice}</if>
+            <if test="distric != null  and distric != ''"> and distric = #{distric}</if>
+            <if test="loanValue != null "> and loan_value = #{loanValue}</if>
+            <if test="exchangeDate != null "> and exchange_date = #{exchangeDate}</if>
+            <if test="productStatus != null  and productStatus != ''"> and product_status = #{productStatus}</if>
+            <if test="ready != null  and ready != ''"> and ready = #{ready}</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectDistricList" resultType="hashMap">
+        SELECT DISTINCT REPLACE(distric,' ','') distric FROM housing
+    </select>
+
+    <select id="selectHomeList" resultType="hashMap">
+        SELECT DISTINCT  name  FROM housing
+    </select>
+    
+    <select id="selectHousingById" parameterType="Long" resultMap="HousingResult">
+        <include refid="selectHousingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHousing" parameterType="Housing" useGeneratedKeys="true" keyProperty="id">
+        insert into housing
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="property != null and property != ''">property,</if>
+            <if test="bankValue != null">bank_value,</if>
+            <if test="marketPrice != null">market_price,</if>
+            <if test="taxPrice != null">tax_price,</if>
+            <if test="distric != null and distric != ''">distric,</if>
+            <if test="loanValue != null">loan_value,</if>
+            <if test="exchangeDate != null">exchange_date,</if>
+            <if test="productStatus != null and productStatus != ''">product_status,</if>
+            <if test="ready != null">ready,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="property != null and property != ''">#{property},</if>
+            <if test="bankValue != null">#{bankValue},</if>
+            <if test="marketPrice != null">#{marketPrice},</if>
+            <if test="taxPrice != null">#{taxPrice},</if>
+            <if test="distric != null and distric != ''">#{distric},</if>
+            <if test="loanValue != null">#{loanValue},</if>
+            <if test="exchangeDate != null">#{exchangeDate},</if>
+            <if test="productStatus != null and productStatus != ''">#{productStatus},</if>
+            <if test="ready != null">#{ready},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHousing" parameterType="Housing">
+        update housing
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="property != null and property != ''">property = #{property},</if>
+            <if test="bankValue != null">bank_value = #{bankValue},</if>
+            <if test="marketPrice != null">market_price = #{marketPrice},</if>
+            <if test="taxPrice != null">tax_price = #{taxPrice},</if>
+            <if test="distric != null and distric != ''">distric = #{distric},</if>
+            <if test="loanValue != null">loan_value = #{loanValue},</if>
+            <if test="exchangeDate != null">exchange_date = #{exchangeDate},</if>
+            <if test="productStatus != null and productStatus != ''">product_status = #{productStatus},</if>
+            <if test="ready != null">ready = #{ready},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHousingById" parameterType="Long">
+        delete from housing where id = #{id}
+    </delete>
+
+    <delete id="deleteHousingByIds" parameterType="String">
+        delete from housing where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
